@@ -45,5 +45,12 @@ namespace Forum.Controllers
             var topics = topicService.GetAll();
             return Ok(topics);
         }
+        [HttpGet]
+        [Route("api/forum/{id}")]
+        public ActionResult GetForId([FromRoute] int id)
+        {
+            var topic = topicService.getTopicForId(id);
+            return Ok(topic);
+        }
     }
 }

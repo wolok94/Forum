@@ -4,6 +4,7 @@ using Forum.Entities;
 using Forum.Exceptions;
 using Forum.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace Forum.Services
@@ -13,7 +14,8 @@ namespace Forum.Services
         void Create(TopicDto topicDto);
         public void Delete(int id);
         public void Update(int id, UpdateTopicDto dto);
-        public IEnumerable<GetAllTopics> GetAll();
+        public List<List<GetComments>> GetAll();
+        public Topic getTopicForId(int id);
     }
 
     public class TopicService : ITopicService
@@ -39,6 +41,7 @@ namespace Forum.Services
                 Description = topicDto.Description,
                 DateOfCreate = topicDto.DateOfCreate,
                 UserId = context.GetId,
+                Comments = topicDto.Comments,
             };
             dbContext.Topics.Add(topic);
             
@@ -70,9 +73,12 @@ namespace Forum.Services
 
             dbContext.SaveChanges();
         }
-        public IEnumerable<GetAllTopics> GetAll()
+        public List<List<GetComments>> GetAll()
         {
-            var topics = dbContext.Topics.ToList();
+            var topics = dbContext
+                .Topics
+                .Include(c => c.Comments)
+                .ToList();
 
             if (topics == null)
             {
@@ -84,11 +90,18 @@ namespace Forum.Services
             }
 
             var mappedTopics = mapper.Map<IEnumerable<GetAllTopics>>(topics);
-            return mappedTopics;
+            List<List<GetComments>> map = new List<List<GetComments>>();
+            foreach (var topic in mappedTopics) {
+                map = mapper.Map<List<List<GetComments>>>(topic.Comments);
+                    }
+            return map;
         }
         public Topic getTopicForId(int id)
         {
-            var topic = dbContext.Topics.FirstOrDefault(x => x.Id == id);
+            var topic = dbContext
+                .Topics
+                .Include(c => c.Comments)
+                .FirstOrDefault(x => x.Id == id);
 
             if (topic == null)
                 throw new NotFoundException("Topic not found");

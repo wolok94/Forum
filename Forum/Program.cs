@@ -14,6 +14,9 @@ using Forum.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.ClearProviders();
+builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+builder.Host.UseNLog();
 // Add services to the container.
 var authenticationSettings = new AuthenticationSettings();
 builder.Configuration.GetSection("Authentication").Bind(authenticationSettings);
@@ -34,21 +37,20 @@ builder.Services.AddAuthentication(option =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey))
 };
 });
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(option => option.JsonSerializerOptions.ReferenceHandler =
+                                                System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
 builder.Services.AddDbContext<ForumDbContext>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ITopicService, TopicService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IUserContextService, UserContextService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<RoleSeeder>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
-builder.Host.UseNLog();
-
-builder.Logging.ClearProviders();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
@@ -61,11 +63,7 @@ var seeder = scope.ServiceProvider.GetRequiredService<RoleSeeder>();
 seeder.seedRoles();
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseAuthentication();
-
 app.UseHttpsRedirection();
-
-
 app.UseAuthorization();
 app.MapControllers();
-
 app.Run();

@@ -18,7 +18,7 @@ namespace Forum.Middleware
             }
             catch (ForbidException e)
             {
-                logger.LogError(e, e.Message);
+                logger.LogError(e,e.Message);
                 context.Response.StatusCode = 401;
                 await context.Response.WriteAsync(e.Message);
             }
