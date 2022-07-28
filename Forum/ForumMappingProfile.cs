@@ -10,10 +10,10 @@ namespace Forum
         {
             CreateMap<CreateUserDto, User>();
             CreateMap<User, GetAllUsersDto>();
-            CreateMap<Topic, GetAllTopics>()
+            CreateMap<Topic, GetAllTopicsDto>()
                 .ForMember(t => t.User, c => c.MapFrom(u => u.User.Nick));
             CreateMap<Comment, CommentDto>();
-            CreateMap<Comment, GetComments>();
+            CreateMap<Comment, GetCommentsDto>();
         }
     }
 }

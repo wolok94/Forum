@@ -18,10 +18,10 @@ namespace Forum.Controllers
         [HttpPost]
         [Route("api/createTopic")]
         [Authorize(Roles = "Admin, User")]
-        public ActionResult Create([FromBody] TopicDto topic)
+        public async Task <IActionResult> Create([FromBody] TopicDto topic)
         {
             
-            topicService.Create(topic);
+            await topicService.Create(topic);
             return Ok();
         }
         [HttpDelete]

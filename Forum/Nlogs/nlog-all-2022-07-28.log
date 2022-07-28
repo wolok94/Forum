@@ -855,3 +855,179 @@ Forum.Entities.Comment -> System.Collections.Generic.List`1[[Forum.Models.GetCom
 2022-07-28 12:29:18.5000||TRACE|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Action Filter: After executing OnActionExecuted on filter Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter.  
 2022-07-28 12:29:18.5000||INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executed action Forum.Controllers.TopicController.GetAll (Forum) in 33699.493ms  
 2022-07-28 12:29:18.5068||INFO|Microsoft.AspNetCore.Routing.EndpointMiddleware|Executed endpoint 'Forum.Controllers.TopicController.GetAll (Forum)'  
+2022-07-28 13:00:39.4916||DEBUG|Microsoft.AspNetCore.Mvc.ModelBinding.ModelBinderFactory|Registered model binder providers, in the following order: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider  
+2022-07-28 13:00:39.5427||DEBUG|Microsoft.Extensions.Hosting.Internal.Host|Hosting starting  
+2022-07-28 13:00:39.5577||INFO|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|User profile is available. Using 'C:\Users\kamil\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.  
+2022-07-28 13:00:39.5577||DEBUG|Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository|Reading data from file 'C:\Users\kamil\AppData\Local\ASP.NET\DataProtection-Keys\key-62ea785f-5dba-4b23-bc99-efe549ca3e31.xml'.  
+2022-07-28 13:00:39.5723||DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|Found key {62ea785f-5dba-4b23-bc99-efe549ca3e31}.  
+2022-07-28 13:00:39.5723||DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.DefaultKeyResolver|Considering key {62ea785f-5dba-4b23-bc99-efe549ca3e31} with expiration date 2022-09-09 10:33:07Z as default key.  
+2022-07-28 13:00:39.5723||DEBUG|Microsoft.AspNetCore.DataProtection.TypeForwardingActivator|Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60  
+2022-07-28 13:00:39.5851||DEBUG|Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor|Decrypting secret element using Windows DPAPI.  
+2022-07-28 13:00:39.5851||DEBUG|Microsoft.AspNetCore.DataProtection.TypeForwardingActivator|Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60  
+2022-07-28 13:00:39.5851||DEBUG|Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.CngCbcAuthenticatedEncryptorFactory|Opening CNG algorithm 'AES' from provider '(null)' with chaining mode CBC.  
+2022-07-28 13:00:39.5851||DEBUG|Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.CngCbcAuthenticatedEncryptorFactory|Opening CNG algorithm 'SHA256' from provider '(null)' with HMAC.  
+2022-07-28 13:00:39.5851||DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingProvider|Using key {62ea785f-5dba-4b23-bc99-efe549ca3e31} as the default key.  
+2022-07-28 13:00:39.5851||DEBUG|Microsoft.AspNetCore.DataProtection.Internal.DataProtectionHostedService|Key ring with default key {62ea785f-5dba-4b23-bc99-efe549ca3e31} was loaded during application startup.  
+2022-07-28 13:00:39.6530||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer|Using development certificate: CN=localhost (Thumbprint: 6C0C392EC72B012174195025DCB577B32C800517)  
+2022-07-28 13:00:39.6842||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:7004  
+2022-07-28 13:00:39.6842||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5004  
+2022-07-28 13:00:39.6842||DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Forum  
+2022-07-28 13:00:39.6842||DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh  
+2022-07-28 13:00:39.6842||DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net  
+2022-07-28 13:00:39.6842||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.  
+2022-07-28 13:00:39.6842||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development  
+2022-07-28 13:00:39.6842||INFO|Microsoft.Hosting.Lifetime|Content root path: E:\Programowanie\Ćwiczenia\Forum\Forum\  
+2022-07-28 13:00:39.6842||DEBUG|Microsoft.Extensions.Hosting.Internal.Host|Hosting started  
+2022-07-28 13:00:40.0613||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH1KB0LRC" accepted.  
+2022-07-28 13:00:40.0613||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH1KB0LRB" accepted.  
+2022-07-28 13:00:40.0613||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH1KB0LRC" started.  
+2022-07-28 13:00:40.0613||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH1KB0LRB" started.  
+2022-07-28 13:00:40.0863||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMJGH1KB0LRC" received FIN.  
+2022-07-28 13:00:40.0863||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMJGH1KB0LRB" received FIN.  
+2022-07-28 13:00:40.0863||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware|Failed to authenticate HTTPS connection. System.IO.IOException:  Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.<FillHandshakeBufferAsync>g__InternalFillHandshakeBufferAsync|187_0[TIOAdapter](TIOAdapter adap, ValueTask`1 task, Int32 minSize)
+   at System.Net.Security.SslStream.ReceiveBlobAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context) 
+2022-07-28 13:00:40.0863||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware|Failed to authenticate HTTPS connection. System.IO.IOException:  Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.<FillHandshakeBufferAsync>g__InternalFillHandshakeBufferAsync|187_0[TIOAdapter](TIOAdapter adap, ValueTask`1 task, Int32 minSize)
+   at System.Net.Security.SslStream.ReceiveBlobAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context) 
+2022-07-28 13:00:40.1368||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH1KB0LRD" accepted.  
+2022-07-28 13:00:40.1472||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH1KB0LRD" started.  
+2022-07-28 13:00:40.1472||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH1KB0LRB" stopped.  
+2022-07-28 13:00:40.1472||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH1KB0LRC" stopped.  
+2022-07-28 13:00:40.1472||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMJGH1KB0LRB" sending FIN because: "The Socket transport's send loop completed gracefully."  
+2022-07-28 13:00:40.1472||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMJGH1KB0LRC" sending FIN because: "The Socket transport's send loop completed gracefully."  
+2022-07-28 13:00:40.2422||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware|Connection 0HMJGH1KB0LRD established using the following protocol: Tls13  
+2022-07-28 13:00:40.2837||TRACE|Microsoft.AspNetCore.Server.Kestrel.Http2|Connection id "0HMJGH1KB0LRD" sending SETTINGS frame for stream ID 0 with length 18 and flags NONE.  
+2022-07-28 13:00:40.2837||TRACE|Microsoft.AspNetCore.Server.Kestrel.Http2|Connection id "0HMJGH1KB0LRD" sending WINDOW_UPDATE frame for stream ID 0 with length 4 and flags 0x0.  
+2022-07-28 13:00:40.2875||TRACE|Microsoft.AspNetCore.Server.Kestrel.Http2|Connection id "0HMJGH1KB0LRD" received SETTINGS frame for stream ID 0 with length 24 and flags NONE.  
+2022-07-28 13:00:40.2875||TRACE|Microsoft.AspNetCore.Server.Kestrel.Http2|Connection id "0HMJGH1KB0LRD" sending SETTINGS frame for stream ID 0 with length 0 and flags ACK.  
+2022-07-28 13:00:40.2875||TRACE|Microsoft.AspNetCore.Server.Kestrel.Http2|Connection id "0HMJGH1KB0LRD" received WINDOW_UPDATE frame for stream ID 0 with length 4 and flags 0x0.  
+2022-07-28 13:00:40.2875||TRACE|Microsoft.AspNetCore.Server.Kestrel.Http2|Connection id "0HMJGH1KB0LRD" received HEADERS frame for stream ID 1 with length 477 and flags END_STREAM, END_HEADERS, PRIORITY.  
+2022-07-28 13:00:40.3414||TRACE|Microsoft.AspNetCore.Server.Kestrel.Http2|Connection id "0HMJGH1KB0LRD" received SETTINGS frame for stream ID 0 with length 0 and flags ACK.  
+2022-07-28 13:00:40.3513||INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:7004/swagger/index.html - -  
+2022-07-28 13:00:40.3953||DEBUG|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|Wildcard detected, all requests with hosts will be allowed.  
+2022-07-28 13:00:40.3953||TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.  
+2022-07-28 13:00:40.4318||DEBUG|Microsoft.AspNetCore.Routing.Matching.DfaMatcher|No candidates found for the request path '/swagger/index.html'  
+2022-07-28 13:00:40.4318||DEBUG|Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware|Request did not match any endpoints  
+2022-07-28 13:00:40.4807||DEBUG|Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler|AuthenticationScheme: Bearer was not authenticated.  
+2022-07-28 13:00:40.4807||TRACE|Microsoft.AspNetCore.Server.Kestrel.Http2|Connection id "0HMJGH1KB0LRD" sending HEADERS frame for stream ID 1 with length 45 and flags END_STREAM, END_HEADERS.  
+2022-07-28 13:00:40.4910||INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:7004/swagger/index.html - - - 404 0 - 141.0131ms  
+2022-07-28 13:00:43.9207||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMJGH1KB0LRD" received FIN.  
+2022-07-28 13:00:43.9207||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Http2|Connection id "0HMJGH1KB0LRD" is closed. The last processed stream ID was 1.  
+2022-07-28 13:00:43.9207||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMJGH1KB0LRD" sending FIN because: "The client closed the connection."  
+2022-07-28 13:00:43.9207||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH1KB0LRD" stopped.  
+2022-07-28 13:00:44.1058||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH1KB0LRE" accepted.  
+2022-07-28 13:00:44.1058||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH1KB0LRE" started.  
+2022-07-28 13:00:44.1058||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH1KB0LRF" accepted.  
+2022-07-28 13:00:44.1058||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMJGH1KB0LRE" received FIN.  
+2022-07-28 13:00:44.1058||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH1KB0LRF" started.  
+2022-07-28 13:00:44.1058||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware|Failed to authenticate HTTPS connection. System.IO.IOException:  Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.<FillHandshakeBufferAsync>g__InternalFillHandshakeBufferAsync|187_0[TIOAdapter](TIOAdapter adap, ValueTask`1 task, Int32 minSize)
+   at System.Net.Security.SslStream.ReceiveBlobAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context) 
+2022-07-28 13:00:44.1058||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH1KB0LRE" stopped.  
+2022-07-28 13:00:44.1058||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMJGH1KB0LRE" sending FIN because: "The Socket transport's send loop completed gracefully."  
+2022-07-28 13:00:44.1058||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware|Connection 0HMJGH1KB0LRF established using the following protocol: Tls13  
+2022-07-28 13:00:44.1163||INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/1.1 GET https://localhost:7004/api/forum - -  
+2022-07-28 13:00:44.1163||TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.  
+2022-07-28 13:00:44.1163||DEBUG|Microsoft.AspNetCore.Routing.Matching.DfaMatcher|1 candidate(s) found for the request path '/api/forum'  
+2022-07-28 13:00:44.1163||DEBUG|Microsoft.AspNetCore.Routing.Matching.DfaMatcher|Endpoint 'Forum.Controllers.TopicController.GetAll (Forum)' with route pattern 'api/forum' is valid for the request path '/api/forum'  
+2022-07-28 13:00:44.1163||DEBUG|Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware|Request matched endpoint 'Forum.Controllers.TopicController.GetAll (Forum)'  
+2022-07-28 13:00:44.1163||DEBUG|Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler|AuthenticationScheme: Bearer was not authenticated.  
+2022-07-28 13:00:44.1163||INFO|Microsoft.AspNetCore.Routing.EndpointMiddleware|Executing endpoint 'Forum.Controllers.TopicController.GetAll (Forum)'  
+2022-07-28 13:00:44.1163||INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Route matched with {action = "GetAll", controller = "Topic"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult GetAll() on controller Forum.Controllers.TopicController (Forum).  
+2022-07-28 13:00:44.1163||DEBUG|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Execution plan of authorization filters (in the following order): None  
+2022-07-28 13:00:44.1163||DEBUG|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Execution plan of resource filters (in the following order): None  
+2022-07-28 13:00:44.1163||DEBUG|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Execution plan of action filters (in the following order): Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000), Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)  
+2022-07-28 13:00:44.1163||DEBUG|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Execution plan of exception filters (in the following order): None  
+2022-07-28 13:00:44.1163||DEBUG|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Execution plan of result filters (in the following order): Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)  
+2022-07-28 13:00:44.1310||DEBUG|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executing controller factory for controller Forum.Controllers.TopicController (Forum)  
+2022-07-28 13:00:44.2142||DEBUG|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executed controller factory for controller Forum.Controllers.TopicController (Forum)  
+2022-07-28 13:00:44.2142||TRACE|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Action Filter: Before executing OnActionExecuting on filter Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter.  
+2022-07-28 13:00:44.2142||TRACE|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Action Filter: After executing OnActionExecuting on filter Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter.  
+2022-07-28 13:00:44.2142||TRACE|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Action Filter: Before executing OnActionExecuting on filter Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter.  
+2022-07-28 13:00:44.2142||TRACE|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Action Filter: After executing OnActionExecuting on filter Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter.  
+2022-07-28 13:00:44.2142||INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executing action method Forum.Controllers.TopicController.GetAll (Forum) - Validation state: Valid  
+2022-07-28 13:00:44.4576||INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executed action method Forum.Controllers.TopicController.GetAll (Forum), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 237.0848ms.  
+2022-07-28 13:00:44.4576||TRACE|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Action Filter: Before executing OnActionExecuted on filter Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter.  
+2022-07-28 13:00:44.4576||TRACE|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Action Filter: After executing OnActionExecuted on filter Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter.  
+2022-07-28 13:00:44.4576||TRACE|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Action Filter: Before executing OnActionExecuted on filter Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter.  
+2022-07-28 13:00:44.4576||TRACE|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Action Filter: After executing OnActionExecuted on filter Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter.  
+2022-07-28 13:00:44.4576||TRACE|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Result Filter: Before executing OnResultExecuting on filter Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter.  
+2022-07-28 13:00:44.4576||TRACE|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Result Filter: After executing OnResultExecuting on filter Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter.  
+2022-07-28 13:00:44.4576||TRACE|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Before executing action result Microsoft.AspNetCore.Mvc.OkObjectResult.  
+2022-07-28 13:00:44.4598||DEBUG|Microsoft.AspNetCore.Mvc.Infrastructure.DefaultOutputFormatterSelector|List of registered output formatters, in the following order: Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter, Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter, Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter, Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter  
+2022-07-28 13:00:44.4598||DEBUG|Microsoft.AspNetCore.Mvc.Infrastructure.DefaultOutputFormatterSelector|No information found on request to perform content negotiation.  
+2022-07-28 13:00:44.4598||DEBUG|Microsoft.AspNetCore.Mvc.Infrastructure.DefaultOutputFormatterSelector|Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.  
+2022-07-28 13:00:44.4598||DEBUG|Microsoft.AspNetCore.Mvc.Infrastructure.DefaultOutputFormatterSelector|Attempting to select the first formatter in the output formatters list which can write the result.  
+2022-07-28 13:00:44.4598||DEBUG|Microsoft.AspNetCore.Mvc.Infrastructure.DefaultOutputFormatterSelector|Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.  
+2022-07-28 13:00:44.4598||INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor|Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Forum.Models.GetAllTopicsDto, Forum, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.  
+2022-07-28 13:00:44.4872||TRACE|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|After executing action result Microsoft.AspNetCore.Mvc.OkObjectResult.  
+2022-07-28 13:00:44.4872||TRACE|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Result Filter: Before executing OnResultExecuted on filter Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter.  
+2022-07-28 13:00:44.4872||TRACE|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Result Filter: After executing OnResultExecuted on filter Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter.  
+2022-07-28 13:00:44.4872||INFO|Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker|Executed action Forum.Controllers.TopicController.GetAll (Forum) in 356.8798ms  
+2022-07-28 13:00:44.4872||INFO|Microsoft.AspNetCore.Routing.EndpointMiddleware|Executed endpoint 'Forum.Controllers.TopicController.GetAll (Forum)'  
+2022-07-28 13:00:44.4872||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH1KB0LRF" completed keep alive response.  
+2022-07-28 13:00:44.4925||INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/1.1 GET https://localhost:7004/api/forum - - - 200 - application/json;+charset=utf-8 376.0459ms  
+2022-07-28 13:02:54.7640||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH1KB0LRF" disconnecting.  
+2022-07-28 13:02:54.7640||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH1KB0LRF" stopped.  
+2022-07-28 13:02:54.7640||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMJGH1KB0LRF" sending FIN because: "The Socket transport's send loop completed gracefully."  
+2022-07-28 13:04:51.5017||DEBUG|Microsoft.AspNetCore.Mvc.ModelBinding.ModelBinderFactory|Registered model binder providers, in the following order: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider  
+2022-07-28 13:04:51.5377||DEBUG|Microsoft.Extensions.Hosting.Internal.Host|Hosting starting  
+2022-07-28 13:04:51.5377||INFO|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|User profile is available. Using 'C:\Users\kamil\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.  
+2022-07-28 13:04:51.5377||DEBUG|Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository|Reading data from file 'C:\Users\kamil\AppData\Local\ASP.NET\DataProtection-Keys\key-62ea785f-5dba-4b23-bc99-efe549ca3e31.xml'.  
+2022-07-28 13:04:51.5377||DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager|Found key {62ea785f-5dba-4b23-bc99-efe549ca3e31}.  
+2022-07-28 13:04:51.5563||DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.DefaultKeyResolver|Considering key {62ea785f-5dba-4b23-bc99-efe549ca3e31} with expiration date 2022-09-09 10:33:07Z as default key.  
+2022-07-28 13:04:51.5563||DEBUG|Microsoft.AspNetCore.DataProtection.TypeForwardingActivator|Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60  
+2022-07-28 13:04:51.5563||DEBUG|Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor|Decrypting secret element using Windows DPAPI.  
+2022-07-28 13:04:51.5563||DEBUG|Microsoft.AspNetCore.DataProtection.TypeForwardingActivator|Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60  
+2022-07-28 13:04:51.5563||DEBUG|Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.CngCbcAuthenticatedEncryptorFactory|Opening CNG algorithm 'AES' from provider '(null)' with chaining mode CBC.  
+2022-07-28 13:04:51.5563||DEBUG|Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.CngCbcAuthenticatedEncryptorFactory|Opening CNG algorithm 'SHA256' from provider '(null)' with HMAC.  
+2022-07-28 13:04:51.5563||DEBUG|Microsoft.AspNetCore.DataProtection.KeyManagement.KeyRingProvider|Using key {62ea785f-5dba-4b23-bc99-efe549ca3e31} as the default key.  
+2022-07-28 13:04:51.5563||DEBUG|Microsoft.AspNetCore.DataProtection.Internal.DataProtectionHostedService|Key ring with default key {62ea785f-5dba-4b23-bc99-efe549ca3e31} was loaded during application startup.  
+2022-07-28 13:04:51.5989||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer|Using development certificate: CN=localhost (Thumbprint: 6C0C392EC72B012174195025DCB577B32C800517)  
+2022-07-28 13:04:51.6236||INFO|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:7004  
+2022-07-28 13:04:51.6236||INFO|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5004  
+2022-07-28 13:04:51.6236||DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Forum  
+2022-07-28 13:04:51.6236||DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh  
+2022-07-28 13:04:51.6236||DEBUG|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net  
+2022-07-28 13:04:51.6236||INFO|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.  
+2022-07-28 13:04:51.6236||INFO|Microsoft.Hosting.Lifetime|Hosting environment: Development  
+2022-07-28 13:04:51.6236||INFO|Microsoft.Hosting.Lifetime|Content root path: E:\Programowanie\Ćwiczenia\Forum\Forum\  
+2022-07-28 13:04:51.6236||DEBUG|Microsoft.Extensions.Hosting.Internal.Host|Hosting started  
+2022-07-28 13:04:51.6862||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMJGH3VAMUNG" received FIN.  
+2022-07-28 13:04:51.6862||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH3VAMUNG" accepted.  
+2022-07-28 13:04:51.6862||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH3VAMUNG" started.  
+2022-07-28 13:04:51.7032||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware|Failed to authenticate HTTPS connection. System.IO.IOException:  Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveBlobAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context) 
+2022-07-28 13:04:51.7235||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH3VAMUNG" stopped.  
+2022-07-28 13:04:51.7282||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMJGH3VAMUNG" sending FIN because: "The Socket transport's send loop completed gracefully."  
+2022-07-28 13:04:51.7420||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH3VAMUNH" accepted.  
+2022-07-28 13:04:51.7420||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH3VAMUNH" started.  
+2022-07-28 13:04:51.8236||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware|Connection 0HMJGH3VAMUNH established using the following protocol: Tls13  
+2022-07-28 13:04:51.8392||TRACE|Microsoft.AspNetCore.Server.Kestrel.Http2|Connection id "0HMJGH3VAMUNH" sending SETTINGS frame for stream ID 0 with length 18 and flags NONE.  
+2022-07-28 13:04:51.8392||TRACE|Microsoft.AspNetCore.Server.Kestrel.Http2|Connection id "0HMJGH3VAMUNH" sending WINDOW_UPDATE frame for stream ID 0 with length 4 and flags 0x0.  
+2022-07-28 13:04:51.8392||TRACE|Microsoft.AspNetCore.Server.Kestrel.Http2|Connection id "0HMJGH3VAMUNH" received SETTINGS frame for stream ID 0 with length 24 and flags NONE.  
+2022-07-28 13:04:51.8392||TRACE|Microsoft.AspNetCore.Server.Kestrel.Http2|Connection id "0HMJGH3VAMUNH" sending SETTINGS frame for stream ID 0 with length 0 and flags ACK.  
+2022-07-28 13:04:51.8392||TRACE|Microsoft.AspNetCore.Server.Kestrel.Http2|Connection id "0HMJGH3VAMUNH" received WINDOW_UPDATE frame for stream ID 0 with length 4 and flags 0x0.  
+2022-07-28 13:04:51.8392||TRACE|Microsoft.AspNetCore.Server.Kestrel.Http2|Connection id "0HMJGH3VAMUNH" received HEADERS frame for stream ID 1 with length 477 and flags END_STREAM, END_HEADERS, PRIORITY.  
+2022-07-28 13:04:51.8925||TRACE|Microsoft.AspNetCore.Server.Kestrel.Http2|Connection id "0HMJGH3VAMUNH" received SETTINGS frame for stream ID 0 with length 0 and flags ACK.  
+2022-07-28 13:04:51.9024||INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:7004/swagger/index.html - -  
+2022-07-28 13:04:51.9718||DEBUG|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|Wildcard detected, all requests with hosts will be allowed.  
+2022-07-28 13:04:51.9718||TRACE|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed.  
+2022-07-28 13:04:52.0315||DEBUG|Microsoft.AspNetCore.Routing.Matching.DfaMatcher|No candidates found for the request path '/swagger/index.html'  
+2022-07-28 13:04:52.0315||DEBUG|Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware|Request did not match any endpoints  
+2022-07-28 13:04:52.0909||DEBUG|Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler|AuthenticationScheme: Bearer was not authenticated.  
+2022-07-28 13:04:52.0909||TRACE|Microsoft.AspNetCore.Server.Kestrel.Http2|Connection id "0HMJGH3VAMUNH" sending HEADERS frame for stream ID 1 with length 45 and flags END_STREAM, END_HEADERS.  
+2022-07-28 13:04:52.0909||INFO|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:7004/swagger/index.html - - - 404 0 - 196.8230ms  
+2022-07-28 13:04:54.3177||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMJGH3VAMUNH" received FIN.  
+2022-07-28 13:04:54.3203||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Http2|Connection id "0HMJGH3VAMUNH" is closed. The last processed stream ID was 1.  
+2022-07-28 13:04:54.3203||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMJGH3VAMUNH" sending FIN because: "The client closed the connection."  
+2022-07-28 13:04:54.3203||DEBUG|Microsoft.AspNetCore.Server.Kestrel.Connections|Connection id "0HMJGH3VAMUNH" stopped.  

@@ -14,7 +14,7 @@ namespace Forum.Services
         void Create(TopicDto topicDto);
         public void Delete(int id);
         public void Update(int id, UpdateTopicDto dto);
-        public List<List<GetComments>> GetAll();
+        public IEnumerable<GetAllTopicsDto> GetAll();
         public Topic getTopicForId(int id);
     }
 
@@ -33,7 +33,7 @@ namespace Forum.Services
             this.mapper = mapper;
         }
 
-        public void Create(TopicDto topicDto)
+        public async Task Create(TopicDto topicDto)
         {
             Topic topic = new Topic()
             {
@@ -43,14 +43,15 @@ namespace Forum.Services
                 UserId = context.GetId,
                 Comments = topicDto.Comments,
             };
-            dbContext.Topics.Add(topic);
+            await dbContext.Topics.AddAsync(topic);
             
             topicDto.UserId = context.GetId;
-            dbContext.SaveChanges();
+            dbContext.SaveChangesAsync();
         }
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
             
+
             var topic = getTopicForId(id);
             var result = authorizationService.AuthorizeAsync(context.User, topic, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
             if (!result.Succeeded)
@@ -58,11 +59,11 @@ namespace Forum.Services
             
 
             dbContext.Topics.Remove(topic);
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
         }
-        public void Update(int id, UpdateTopicDto dto)
+        public async Task Update(int id, UpdateTopicDto dto)
         {
-            var topic = dbContext.Topics.FirstOrDefault(t => t.Id == id);
+            var topic = await dbContext.Topics.FirstOrDefaultAsync(t => t.Id == id);
             var resultAuthorization = authorizationService.AuthorizeAsync(context.User, topic, new ResourceOperationRequirement(ResourceOperation.Update)).Result;
 
             if (!resultAuthorization.Succeeded)
@@ -71,9 +72,9 @@ namespace Forum.Services
             topic.NameOfTopic = dto.Topic;
             topic.Description = dto.Description;
 
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
         }
-        public List<List<GetComments>> GetAll()
+        public async Task <IEnumerable<GetAllTopicsDto>> GetAll()
         {
             var topics = dbContext
                 .Topics
@@ -86,22 +87,29 @@ namespace Forum.Services
             }
             foreach (var topic in topics)
             {
-                topic.User = dbContext.Users.FirstOrDefault(u => u.Id == topic.UserId);
+                topic.User = await  dbContext.Users.FirstOrDefaultAsync(u => u.Id == topic.UserId);
             }
 
-            var mappedTopics = mapper.Map<IEnumerable<GetAllTopics>>(topics);
-            List<List<GetComments>> map = new List<List<GetComments>>();
-            foreach (var topic in mappedTopics) {
-                map = mapper.Map<List<List<GetComments>>>(topic.Comments);
-                    }
-            return map;
+            foreach(var topic in topics)
+            {
+                foreach(var comment in topic.Comments)
+                {
+                    
+                }
+            }
+
+            var mappedTopics = mapper.Map<IEnumerable<GetAllTopicsDto>>(topics);
+
+        
+
+            return mappedTopics;
         }
-        public Topic getTopicForId(int id)
+        public async Task <Topic> getTopicForId(int id)
         {
-            var topic = dbContext
+            var topic = await dbContext
                 .Topics
                 .Include(c => c.Comments)
-                .FirstOrDefault(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (topic == null)
                 throw new NotFoundException("Topic not found");
