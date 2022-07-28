@@ -18,9 +18,16 @@ namespace Forum.Controllers
         [HttpPost]
         [Route("api/forum/{id}/comments")]
         [Authorize(Roles = "Admin, User")]
-        public ActionResult Create([FromRoute] int id, [FromBody] CommentDto dto)
+        public async Task <IActionResult> Create([FromRoute] int id, [FromBody] CommentDto dto)
         {
-            commentService.Create(id, dto);
+            await commentService.Create(id, dto);
+            return Ok();
+        }
+        [HttpDelete]
+        [Route("api/foum/{id}/comments")]
+        public async Task <IActionResult> Delete ([FromRoute] int id)
+        {
+            await commentService.Delete(id);
             return Ok();
         }
     }

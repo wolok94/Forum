@@ -40,7 +40,8 @@ builder.Services.AddAuthentication(option =>
 builder.Services.AddControllers().AddJsonOptions(option => option.JsonSerializerOptions.ReferenceHandler =
                                                 System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
 builder.Services.AddAuthorization();
-builder.Services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
+builder.Services.AddScoped<IAuthorizationHandler, TopicResourceOperationRequirementHandler>();
+builder.Services.AddScoped<IAuthorizationHandler, CommentResourceOperationRequirementHandler>();
 builder.Services.AddDbContext<ForumDbContext>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<IAccountService, AccountService>();

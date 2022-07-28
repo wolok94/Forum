@@ -4,7 +4,7 @@ using System.Security.Claims;
 
 namespace Forum.Authorization
 {
-    public class ResourceOperationRequirementHandler : AuthorizationHandler<ResourceOperationRequirement, Topic>
+    public class TopicResourceOperationRequirementHandler : AuthorizationHandler<ResourceOperationRequirement, Topic>
     {
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ResourceOperationRequirement requirement, Topic topic)
         {
@@ -22,5 +22,6 @@ namespace Forum.Authorization
             }
             return Task.CompletedTask;
         }
+
     }
 }

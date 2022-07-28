@@ -11,11 +11,11 @@ namespace Forum.Services
 {
     public interface ITopicService
     {
-        void Create(TopicDto topicDto);
-        public void Delete(int id);
-        public void Update(int id, UpdateTopicDto dto);
-        public IEnumerable<GetAllTopicsDto> GetAll();
-        public Topic getTopicForId(int id);
+        Task Create(TopicDto topicDto);
+        public Task Delete(int id);
+        public Task Update(int id, UpdateTopicDto dto);
+        public Task <IEnumerable<GetAllTopicsDto>> GetAll();
+        public Task <Topic> getTopicForId(int id);
     }
 
     public class TopicService : ITopicService
@@ -46,13 +46,13 @@ namespace Forum.Services
             await dbContext.Topics.AddAsync(topic);
             
             topicDto.UserId = context.GetId;
-            dbContext.SaveChangesAsync();
+            await dbContext.SaveChangesAsync();
         }
         public async Task Delete(int id)
         {
             
 
-            var topic = getTopicForId(id);
+            var topic = await  getTopicForId(id);
             var result = authorizationService.AuthorizeAsync(context.User, topic, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
             if (!result.Succeeded)
                 throw new ForbidException("You are unauthorized");
@@ -76,10 +76,10 @@ namespace Forum.Services
         }
         public async Task <IEnumerable<GetAllTopicsDto>> GetAll()
         {
-            var topics = dbContext
+            var topics = await  dbContext
                 .Topics
                 .Include(c => c.Comments)
-                .ToList();
+                .ToListAsync();
 
             if (topics == null)
             {
@@ -90,13 +90,7 @@ namespace Forum.Services
                 topic.User = await  dbContext.Users.FirstOrDefaultAsync(u => u.Id == topic.UserId);
             }
 
-            foreach(var topic in topics)
-            {
-                foreach(var comment in topic.Comments)
-                {
-                    
-                }
-            }
+            
 
             var mappedTopics = mapper.Map<IEnumerable<GetAllTopicsDto>>(topics);
 

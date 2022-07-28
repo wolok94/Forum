@@ -26,30 +26,30 @@ namespace Forum.Controllers
         }
         [HttpDelete]
         [Route("api/{id}")]
-        public ActionResult Delete([FromRoute] int id)
+        public async Task <IActionResult> Delete([FromRoute] int id)
         {
-            topicService.Delete(id);
+            await topicService.Delete(id);
             return NoContent();
         }
         [HttpPut]
         [Route("api/{id}/update")]
-        public ActionResult Update([FromRoute] int id, [FromBody] UpdateTopicDto dto)
+        public async Task <IActionResult> Update([FromRoute] int id, [FromBody] UpdateTopicDto dto)
         {
-            topicService.Update(id, dto);
+            await topicService.Update(id, dto);
             return Ok();
         }
         [HttpGet]
         [Route("api/forum")]
-        public ActionResult GetAll()
+        public async Task <IActionResult> GetAll()
         {
-            var topics = topicService.GetAll();
+            var topics = await topicService.GetAll();
             return Ok(topics);
         }
         [HttpGet]
         [Route("api/forum/{id}")]
-        public ActionResult GetForId([FromRoute] int id)
+        public async Task <IActionResult> GetForId([FromRoute] int id)
         {
-            var topic = topicService.getTopicForId(id);
+            var topic = await topicService.getTopicForId(id);
             return Ok(topic);
         }
     }

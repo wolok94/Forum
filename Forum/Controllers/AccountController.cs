@@ -19,26 +19,26 @@ namespace Forum.Controllers
         [HttpPost]
         [Route("api/account/register")]
         [Authorize(Roles = "Admin")]
-        public ActionResult Create([FromBody] CreateUserDto userDto)
+        public async Task <IActionResult> Create([FromBody] CreateUserDto userDto)
         {
-            accountService.RegisterUser(userDto);
+            await accountService.RegisterUser(userDto);
             return Ok();
         }
 
         [HttpPost]
         [Route("api/account/login")]
-        public ActionResult Login([FromBody] LoginDto dto)
+        public async Task <IActionResult> Login([FromBody] LoginDto dto)
         {
-            var token = accountService.GenerateJWT(dto);
+            var token = await accountService.GenerateJWT(dto);
             return Ok(token);
 
         }
         [HttpGet]
         [Route("api/accounts")]
         [Authorize(Roles = "Admin")]
-        public ActionResult GetAll()
+        public async Task <IActionResult> GetAll()
         {
-            var users = accountService.GetAll();
+            var users = await accountService.GetAll();
             return Ok(users);
         }
 

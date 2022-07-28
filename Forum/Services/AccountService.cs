@@ -13,9 +13,9 @@ namespace Forum.Services
 {
     public interface IAccountService
     {
-        void RegisterUser(CreateUserDto dto);
-        string GenerateJWT(LoginDto dto);
-        IEnumerable<GetAllUsersDto> GetAll();
+        Task RegisterUser(CreateUserDto dto);
+        Task<string> GenerateJWT(LoginDto dto);
+        Task<IEnumerable<GetAllUsersDto>> GetAll();
     }
 
     public class AccountService : IAccountService
@@ -33,11 +33,11 @@ namespace Forum.Services
             this.authenticationSettings = authenticationSettings;
             this.mapper = mapper;
         }
-        public string GenerateJWT(LoginDto dto)
+        public async Task <string> GenerateJWT(LoginDto dto)
         {
-            var user = dbContext.Users
+            var user = await dbContext.Users
                 .Include(r => r.Role)
-                .FirstOrDefault(u => u.Nick == dto.Nick);
+                .FirstOrDefaultAsync(u => u.Nick == dto.Nick);
 
             if (user == null)
             {
@@ -74,17 +74,17 @@ namespace Forum.Services
 
         }
 
-        public IEnumerable<GetAllUsersDto> GetAll()
+        public async Task <IEnumerable<GetAllUsersDto>> GetAll()
         {
-            var users = dbContext.Users
+            var users = await dbContext.Users
                 .Include(x => x.Role)
-                .ToList();
+                .ToListAsync();
 
             var mapUsers = mapper.Map<List<GetAllUsersDto>>(users);
             return mapUsers;
         }
 
-        public void RegisterUser(CreateUserDto dto)
+        public async Task RegisterUser(CreateUserDto dto)
         {
             var newUser = new User()
             {
@@ -97,8 +97,8 @@ namespace Forum.Services
             };
             var hasherPassword = passwordHasher.HashPassword(newUser, dto.Password);
             newUser.PasswordHash = hasherPassword;
-            dbContext.Add(newUser);
-            dbContext.SaveChanges();
+            await dbContext.AddAsync(newUser);
+            await dbContext.SaveChangesAsync();
 
         }
     }
