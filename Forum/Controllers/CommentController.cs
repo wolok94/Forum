@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Forum.Controllers
 {
     [ApiController]
+    [Route("api/forum/")]
     public class CommentController : ControllerBase
     {
         private readonly ICommentService commentService;
@@ -17,7 +18,7 @@ namespace Forum.Controllers
             this.commentService = commentService;
         }
         [HttpPost]
-        [Route("api/forum/{id}/comments")]
+        [Route("{id}/comments")]
         [Authorize(Roles = "Admin, User")]
         public async Task <IActionResult> Create([FromRoute] int id, [FromBody] CommentDto dto)
         {
@@ -25,18 +26,17 @@ namespace Forum.Controllers
             return Ok();
         }
         [HttpDelete]
-        [Route("api/foum/{id}/comments")]
+        [Route("{id}/comments")]
         public async Task <IActionResult> Delete ([FromRoute] int id)
         {
             await commentService.Delete(id);
             return Ok();
         }
         [HttpGet]
-        [Route("api/forum/{topicId}/comments")]
+        [Route("{topicId}/comments")]
         public async Task <IActionResult> GetAll([FromRoute] int topicId, [FromQuery] PaginationFilter paginationFilter)
         {
-            var comments = await commentService.GetAll(paginationFilter, topicId);
-            return Ok(comments);
+            return Ok(await commentService.GetAll(paginationFilter, topicId));
         }
     }
 }
