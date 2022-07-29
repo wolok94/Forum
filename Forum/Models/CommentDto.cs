@@ -1,9 +1,8 @@
-﻿namespace Forum.Models
+﻿namespace Forum.Models;
+
+public class CommentDto
 {
-    public class CommentDto
-    {
-        public DateTime DateOfCreate { get; set; } = DateTime.Now;
-        public string Description { get; set; }
-     
-    }
+    public DateTime DateOfCreate { get; set; } = DateTime.Now;
+    public string Description { get; set; }
+
 }

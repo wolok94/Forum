@@ -5,7 +5,10 @@ namespace Forum.Entities
 {
     public class ForumDbContext :DbContext
     {
-        private string connectionString = "Server=LAPTOP-VQRVD89V\\SQLEXPRESS;Database=Forum;Trusted_Connection=True;";
+        public ForumDbContext(DbContextOptions<ForumDbContext> options) : base(options)
+        {
+
+        }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Topic> Topics { get; set; }
@@ -29,9 +32,6 @@ namespace Forum.Entities
 
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder builder)
-        {
-            builder.UseSqlServer(connectionString);
-        }
+
     }
 }

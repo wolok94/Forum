@@ -12,7 +12,7 @@
 
         public PaginationFilter(int pageNumber, int pageSize, string? searchPhrase)
         {
-            this.PageNumber = pageNumber < 1 ? 1 : pageNumber;
+            this.PageNumber = pageNumber < 0 ? 0 : pageNumber;
             this.PageSize = pageSize < 1 ? 1 : pageSize;
             this.SearchPhrase = searchPhrase;
         }

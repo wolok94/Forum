@@ -11,6 +11,7 @@ using Forum.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using NLog.Web;
 using Forum.Middleware;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,7 +43,7 @@ builder.Services.AddControllers().AddJsonOptions(option => option.JsonSerializer
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<IAuthorizationHandler, TopicResourceOperationRequirementHandler>();
 builder.Services.AddScoped<IAuthorizationHandler, CommentResourceOperationRequirementHandler>();
-builder.Services.AddDbContext<ForumDbContext>();
+builder.Services.AddDbContext<ForumDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ForumDbContextConnectionString")));
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ITopicService, TopicService>();

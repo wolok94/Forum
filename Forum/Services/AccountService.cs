@@ -11,12 +11,7 @@ using System.Text;
 
 namespace Forum.Services
 {
-    public interface IAccountService
-    {
-        Task RegisterUser(CreateUserDto dto);
-        Task<string> GenerateJWT(LoginDto dto);
-        Task<IEnumerable<GetAllUsersDto>> GetAll();
-    }
+
 
     public class AccountService : IAccountService
     {

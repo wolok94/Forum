@@ -7,6 +7,7 @@ namespace Forum.Controllers
 {
     
     [ApiController]
+    [Route("api/")]
     public class AccountController : ControllerBase
     {
         private readonly IAccountService accountService;
@@ -17,7 +18,7 @@ namespace Forum.Controllers
         }
 
         [HttpPost]
-        [Route("api/account/register")]
+        [Route("/account/register")]
         [Authorize(Roles = "Admin")]
         public async Task <IActionResult> Create([FromBody] CreateUserDto userDto)
         {
@@ -26,20 +27,17 @@ namespace Forum.Controllers
         }
 
         [HttpPost]
-        [Route("api/account/login")]
+        [Route("account/login")]
         public async Task <IActionResult> Login([FromBody] LoginDto dto)
         {
-            var token = await accountService.GenerateJWT(dto);
-            return Ok(token);
-
+            return Ok(await accountService.GenerateJWT(dto));
         }
         [HttpGet]
-        [Route("api/accounts")]
+        [Route("accounts")]
         [Authorize(Roles = "Admin")]
         public async Task <IActionResult> GetAll()
         {
-            var users = await accountService.GetAll();
-            return Ok(users);
+            return Ok(await accountService.GetAll());
         }
 
     }

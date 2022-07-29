@@ -1,23 +1,18 @@
 ﻿using System.Security.Claims;
 
-namespace Forum.Services
+namespace Forum.Services;
+
+
+
+public class UserContextService : IUserContextService
 {
-    public interface IUserContextService
+    private readonly IHttpContextAccessor contextHttp;
+
+    public UserContextService(IHttpContextAccessor contextHttp)
     {
-        int? GetId { get; }
-        ClaimsPrincipal User { get; }
+        this.contextHttp = contextHttp;
     }
 
-    public class UserContextService : IUserContextService
-    {
-        private readonly IHttpContextAccessor contextHttp;
-
-        public UserContextService(IHttpContextAccessor contextHttp)
-        {
-            this.contextHttp = contextHttp;
-        }
-
-        public ClaimsPrincipal User => contextHttp.HttpContext?.User;
-        public int? GetId => User is null ? null : (int?)int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
-    }
+    public ClaimsPrincipal User => contextHttp.HttpContext?.User;
+    public int? GetId => User is null ? null : (int?)int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
 }
