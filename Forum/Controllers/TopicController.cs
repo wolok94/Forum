@@ -1,5 +1,6 @@
 ﻿using Forum.Entities;
 using Forum.Models;
+using Forum.Pagination;
 using Forum.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -40,9 +41,10 @@ namespace Forum.Controllers
         }
         [HttpGet]
         [Route("api/forum")]
-        public async Task <IActionResult> GetAll()
+        public async Task <IActionResult> GetAll([FromQuery] PaginationFilter paginationFilter)
         {
-            var topics = await topicService.GetAll();
+
+            var topics = await topicService.GetAll(paginationFilter);
             return Ok(topics);
         }
         [HttpGet]

@@ -1,5 +1,6 @@
 ﻿using Forum.Entities;
 using Forum.Models;
+using Forum.Pagination;
 using Forum.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,13 @@ namespace Forum.Controllers
         {
             await commentService.Delete(id);
             return Ok();
+        }
+        [HttpGet]
+        [Route("api/forum/{topicId}/comments")]
+        public async Task <IActionResult> GetAll([FromRoute] int topicId, [FromQuery] PaginationFilter paginationFilter)
+        {
+            var comments = await commentService.GetAll(paginationFilter, topicId);
+            return Ok(comments);
         }
     }
 }

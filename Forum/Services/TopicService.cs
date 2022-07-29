@@ -3,6 +3,7 @@ using Forum.Authorization;
 using Forum.Entities;
 using Forum.Exceptions;
 using Forum.Models;
+using Forum.Pagination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -14,7 +15,7 @@ namespace Forum.Services
         Task Create(TopicDto topicDto);
         public Task Delete(int id);
         public Task Update(int id, UpdateTopicDto dto);
-        public Task <IEnumerable<GetAllTopicsDto>> GetAll();
+        public Task<PagedResult<GetAllTopicsDto>> GetAll(PaginationFilter paginationFilter);
         public Task <Topic> getTopicForId(int id);
     }
 
@@ -74,12 +75,27 @@ namespace Forum.Services
 
             await dbContext.SaveChangesAsync();
         }
-        public async Task <IEnumerable<GetAllTopicsDto>> GetAll()
+        public async Task <PagedResult<GetAllTopicsDto>> GetAll(PaginationFilter paginationFilter)
         {
-            var topics = await  dbContext
+            
+
+            var basicQuery = await dbContext
                 .Topics
                 .Include(c => c.Comments)
+                .Where(r => paginationFilter.SearchPhrase == null
+                || r.NameOfTopic.ToLower().Contains(paginationFilter.SearchPhrase.ToLower())
+                || r.Description.ToLower().Contains(paginationFilter.SearchPhrase.ToLower()))
                 .ToListAsync();
+
+
+            var topics = basicQuery
+                .Skip((paginationFilter.PageNumber -1) * paginationFilter.PageSize)
+                .Take(paginationFilter.PageSize)
+                .ToList();
+
+            var totalItemsCount = basicQuery.Count();
+
+            
 
             if (topics == null)
             {
@@ -92,11 +108,13 @@ namespace Forum.Services
 
             
 
-            var mappedTopics = mapper.Map<IEnumerable<GetAllTopicsDto>>(topics);
+            var mappedTopics = mapper.Map<List<GetAllTopicsDto>>(topics);
 
-        
+            var pagedResult = new PagedResult<GetAllTopicsDto>(mappedTopics, paginationFilter.PageSize, paginationFilter.PageNumber, totalItemsCount);
 
-            return mappedTopics;
+
+
+            return pagedResult;
         }
         public async Task <Topic> getTopicForId(int id)
         {

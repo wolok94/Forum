@@ -1,4 +1,6 @@
-﻿namespace Forum.Entities
+﻿using System.Drawing;
+
+namespace Forum.Entities
 {
     public class User
     {
@@ -9,9 +11,11 @@
         public string LastName { get; set; }
         public string PasswordHash { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public string? ImagePath { get; set; }
         public List<Topic> NumberOfCreatedTopics { get; set; }
         public virtual Role Role { get; set; }
         public int RoleId { get; set; }
+        
 
     }
 }

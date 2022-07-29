@@ -1,7 +1,9 @@
-﻿using Forum.Authorization;
+﻿using AutoMapper;
+using Forum.Authorization;
 using Forum.Entities;
 using Forum.Exceptions;
 using Forum.Models;
+using Forum.Pagination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +13,7 @@ namespace Forum.Services
     {
         Task Create(int id, CommentDto dto);
         Task Delete(int id);
+        Task<PagedResult<GetCommentsDto>> GetAll(PaginationFilter paginationFilter, int topicId);
     }
 
     public class CommentService : ICommentService
@@ -18,12 +21,14 @@ namespace Forum.Services
         private readonly ForumDbContext dbContext;
         private readonly IUserContextService userContext;
         private readonly IAuthorizationService authorizationService;
+        private readonly IMapper mapper;
 
-        public CommentService(ForumDbContext dbContext, IUserContextService userContext, IAuthorizationService authorizationService)
+        public CommentService(ForumDbContext dbContext, IUserContextService userContext, IAuthorizationService authorizationService, IMapper mapper)
         {
             this.dbContext = dbContext;
             this.userContext = userContext;
             this.authorizationService = authorizationService;
+            this.mapper = mapper;
         }
         public async Task Create(int id, CommentDto dto)
         {
@@ -57,6 +62,34 @@ namespace Forum.Services
             dbContext.Comments.Remove(comment);
             await dbContext.SaveChangesAsync();
 
+        }
+        public async Task<PagedResult<GetCommentsDto>> GetAll(PaginationFilter paginationFilter, int topicId)
+        {
+
+            var basicQuery = await dbContext.Comments
+                .Where(r => r.TopicId == topicId && 
+                paginationFilter.SearchPhrase == null || r.Description == paginationFilter.SearchPhrase)
+                .ToListAsync();
+
+            var comments = basicQuery
+                .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
+                .Take(paginationFilter.PageSize)
+                .ToList();
+
+            var totalItemsCount = basicQuery.Count;
+
+            if (comments == null)
+            {
+                throw new NotFoundException("Comments not founded");
+            }
+
+            var mappedComments = mapper.Map<List<GetCommentsDto>>(comments);
+
+            var pagedResult = new PagedResult<GetCommentsDto>(mappedComments, paginationFilter.PageSize, paginationFilter.PageNumber, totalItemsCount);
+
+            return pagedResult;
+
+            
         }
     }
 }
