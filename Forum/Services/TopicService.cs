@@ -33,11 +33,10 @@ public class TopicService : ITopicService
             NameOfTopic = topicDto.NameOfTopic,
             Description = topicDto.Description,
             DateOfCreate = topicDto.DateOfCreate,
-            UserId = context.GetId,
+            UserId = (int)context.GetId,
             Comments = topicDto.Comments,
         };
         await dbContext.Topics.AddAsync(topic);
-        topicDto.UserId = context.GetId;
         await dbContext.SaveChangesAsync();
     }
     public async Task Delete(int id)
@@ -66,6 +65,7 @@ public class TopicService : ITopicService
     {
         var basicQuery = await dbContext
             .Topics
+            .AsNoTracking()
             .Include(c => c.Comments)
             .Include(u => u.User)
             .Where(r => paginationFilter.SearchPhrase == null
@@ -92,6 +92,7 @@ public class TopicService : ITopicService
     {
         var topic = await dbContext
             .Topics
+            .AsNoTracking()
             .Include(c => c.Comments)
             .FirstOrDefaultAsync(x => x.Id == id);
 

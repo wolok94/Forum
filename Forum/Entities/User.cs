@@ -12,8 +12,9 @@ namespace Forum.Entities
         public string PasswordHash { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string? ImagePath { get; set; }
-        public List<Topic> NumberOfCreatedTopics { get; set; }
-        public virtual Role Role { get; set; }
+        public List<Topic> Topics { get; set; } = new List<Topic>();
+        public List<Comment> Comments { get; set; } = new List<Comment>();
+        public Role Role { get; set; }
         public int RoleId { get; set; }
         
 
