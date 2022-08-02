@@ -29,15 +29,14 @@ namespace Forum.Services
         {
             Comment comment = new Comment()
             {
-                UsernameThatCreatedComment = userContext.User.Identity.Name,
+                UserId = (int)userContext.GetId,
                 DateOfCreate = dto.DateOfCreate,
                 Description = dto.Description,
                 TopicId = id,
 
             };
             await dbContext.Comments.AddAsync(comment);
-            var topic = await dbContext.Topics.FirstOrDefaultAsync(t => t.Id == id);
-            topic.Comments.Add(comment);
+
             await dbContext.SaveChangesAsync();
         }
         public async Task Delete(int id)
@@ -54,6 +53,7 @@ namespace Forum.Services
             {
                 throw new ForbidException("You are unauthorized");
             }
+
             dbContext.Comments.Remove(comment);
             await dbContext.SaveChangesAsync();
 
@@ -62,6 +62,7 @@ namespace Forum.Services
         {
 
             var basicQuery = await dbContext.Comments
+                .AsNoTracking()
                 .Where(r => r.TopicId == topicId && 
                 paginationFilter.SearchPhrase == null || r.Description == paginationFilter.SearchPhrase)
                 .ToListAsync();

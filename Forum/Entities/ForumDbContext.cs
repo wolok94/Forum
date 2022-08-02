@@ -18,17 +18,28 @@ namespace Forum.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-                .Property(x => x.Email)
-                .IsRequired();
+            modelBuilder.Entity<Topic>(eb =>
+            {
+                eb.HasOne(u => u.User).WithMany(t => t.Topics).HasForeignKey(u => u.UserId).OnDelete(DeleteBehavior.ClientCascade);
+                eb.Property(x => x.NameOfTopic).IsRequired();
+            });
 
-            modelBuilder.Entity<Topic>()
-                .Property(x => x.NameOfTopic)
-                .IsRequired();
+            modelBuilder.Entity<User>(eb =>
+            {
+                eb.HasMany(c => c.Comments).WithOne(u => u.User).HasForeignKey(c => c.UserId);
+            });
 
-            modelBuilder.Entity<Role>()
-                .Property(x => x.Name)
-                .IsRequired();
+
+            modelBuilder.Entity<Role>(eb =>
+            {
+                eb.HasMany(u => u.Users).WithOne(r => r.Role).HasForeignKey(u => u.RoleId);
+                eb.Property(x => x.Name).IsRequired();
+            });
+
+
+
+
+
 
         }
 

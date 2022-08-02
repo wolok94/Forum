@@ -55,7 +55,7 @@ builder.Services.AddScoped<RoleSeeder>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -66,6 +66,11 @@ seeder.seedRoles();
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseAuthentication();
 app.UseHttpsRedirection();
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Forum");
+});
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

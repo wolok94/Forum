@@ -72,6 +72,7 @@ namespace Forum.Services
         public async Task <IEnumerable<GetAllUsersDto>> GetAll()
         {
             var users = await dbContext.Users
+                .AsNoTracking()
                 .Include(x => x.Role)
                 .ToListAsync();
 
