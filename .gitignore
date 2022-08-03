@@ -1,1 +1,5 @@
-appsettings.json, Nlogs
+.vs/Forum/v17/.suo
+*.log
+.vs/Forum/v17/.futdcache.v1
+.vs/Forum/DesignTimeBuild/.dtbcache.v2
+Forum/appsettings.json
