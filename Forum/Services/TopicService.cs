@@ -34,17 +34,18 @@ public class TopicService : ITopicService
             Description = topicDto.Description,
             DateOfCreate = topicDto.DateOfCreate,
             UserId = (int)context.GetId,
-            Comments = topicDto.Comments,
+            
         };
         await dbContext.Topics.AddAsync(topic);
         await dbContext.SaveChangesAsync();
     }
     public async Task Delete(int id)
     {
-        var topic = await getTopicForId(id);
-        var result = authorizationService.AuthorizeAsync(context.User, topic, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+        var topicDto = await getTopicForId(id);
+        var result = authorizationService.AuthorizeAsync(context.User, topicDto, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
         if (!result.Succeeded)
             throw new ForbidException("You are unauthorized");
+        var topic = mapper.Map<Topic>(topicDto);
         dbContext.Topics.Remove(topic);
         await dbContext.SaveChangesAsync();
     }
@@ -88,16 +89,20 @@ public class TopicService : ITopicService
         return pagedResult;
     }
 
-    public async Task<Topic> getTopicForId(int id)
+    public async Task<TopicDto> getTopicForId(int id)
     {
         var topic = await dbContext
             .Topics
             .AsNoTracking()
             .Include(c => c.Comments)
+            .ThenInclude(c => c.User)
+            .Include(u => u.User)
             .FirstOrDefaultAsync(x => x.Id == id);
+
+        var topicDto = mapper.Map<TopicDto>(topic);
 
         if (topic == null)
             throw new NotFoundException("Topic not found");
-         return topic;
+         return topicDto;
     }
 }

@@ -65,6 +65,7 @@ namespace Forum.Services
                 .AsNoTracking()
                 .Where(r => r.TopicId == topicId && 
                 paginationFilter.SearchPhrase == null || r.Description == paginationFilter.SearchPhrase)
+                .Include(u => u.User)
                 .ToListAsync();
 
             var comments = basicQuery
@@ -84,8 +85,14 @@ namespace Forum.Services
             var pagedResult = new PagedResult<GetCommentsDto>(mappedComments, paginationFilter.PageSize, paginationFilter.PageNumber, totalItemsCount);
 
             return pagedResult;
+         }
 
-            
+        public async Task Update(int commentId, string description)
+        {
+            var comment = await dbContext.Comments.FirstOrDefaultAsync(c => c.Id == commentId);
+            comment.Description = description;
+            await dbContext.SaveChangesAsync();
+
         }
     }
 }

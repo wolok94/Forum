@@ -9,6 +9,6 @@ public interface ITopicService
     Task Create(TopicDto topicDto);
     Task Delete(int id);
     Task<PagedResult<GetAllTopicsDto>> GetAll(PaginationFilter paginationFilter);
-    Task<Topic> getTopicForId(int id);
+    Task<TopicDto> getTopicForId(int id);
     Task Update(int id, UpdateTopicDto dto);
 }

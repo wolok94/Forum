@@ -8,4 +8,5 @@ public interface ICommentService
     Task Create(int id, CommentDto dto);
     Task Delete(int id);
     Task<PagedResult<GetCommentsDto>> GetAll(PaginationFilter paginationFilter, int topicId);
+    Task Update(int commentId, string description);
 }
