@@ -58,13 +58,14 @@ namespace Forum.Services
             await dbContext.SaveChangesAsync();
 
         }
-        public async Task<PagedResult<GetCommentsDto>> GetAll(PaginationFilter paginationFilter, int topicId)
+        public async Task<PagedResult<CommentDto>> GetAll(PaginationFilter paginationFilter, int topicId)
         {
 
             var basicQuery = await dbContext.Comments
                 .AsNoTracking()
                 .Where(r => r.TopicId == topicId && 
                 paginationFilter.SearchPhrase == null || r.Description == paginationFilter.SearchPhrase)
+                .Include(u => u.User)
                 .ToListAsync();
 
             var comments = basicQuery
@@ -79,13 +80,19 @@ namespace Forum.Services
                 throw new NotFoundException("Comments not founded");
             }
 
-            var mappedComments = mapper.Map<List<GetCommentsDto>>(comments);
+            var mappedComments = mapper.Map<List<CommentDto>>(comments);
 
-            var pagedResult = new PagedResult<GetCommentsDto>(mappedComments, paginationFilter.PageSize, paginationFilter.PageNumber, totalItemsCount);
+            var pagedResult = new PagedResult<CommentDto>(mappedComments, paginationFilter.PageSize, paginationFilter.PageNumber, totalItemsCount);
 
             return pagedResult;
+         }
 
-            
+        public async Task Update(int commentId, string description)
+        {
+            var comment = await dbContext.Comments.FirstOrDefaultAsync(c => c.Id == commentId);
+            comment.Description = description;
+            await dbContext.SaveChangesAsync();
+
         }
     }
 }

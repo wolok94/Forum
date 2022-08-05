@@ -69,14 +69,14 @@ namespace Forum.Services
 
         }
 
-        public async Task <IEnumerable<GetAllUsersDto>> GetAll()
+        public async Task <IEnumerable<UserDto>> GetAll()
         {
             var users = await dbContext.Users
                 .AsNoTracking()
                 .Include(x => x.Role)
                 .ToListAsync();
 
-            var mapUsers = mapper.Map<List<GetAllUsersDto>>(users);
+            var mapUsers = mapper.Map<List<UserDto>>(users);
             return mapUsers;
         }
 
@@ -96,6 +96,13 @@ namespace Forum.Services
             await dbContext.AddAsync(newUser);
             await dbContext.SaveChangesAsync();
 
+        }
+
+        public async Task<UserDto> GetById(int id)
+        {
+            var user = await dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+            var userDto = mapper.Map<UserDto>(user);
+            return userDto;
         }
     }
 }

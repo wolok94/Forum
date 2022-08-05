@@ -34,17 +34,18 @@ public class TopicService : ITopicService
             Description = topicDto.Description,
             DateOfCreate = topicDto.DateOfCreate,
             UserId = (int)context.GetId,
-            Comments = topicDto.Comments,
+            
         };
         await dbContext.Topics.AddAsync(topic);
         await dbContext.SaveChangesAsync();
     }
     public async Task Delete(int id)
     {
-        var topic = await getTopicForId(id);
-        var result = authorizationService.AuthorizeAsync(context.User, topic, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+        var topicDto = await getTopicForId(id);
+        var result = authorizationService.AuthorizeAsync(context.User, topicDto, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
         if (!result.Succeeded)
             throw new ForbidException("You are unauthorized");
+        var topic = mapper.Map<Topic>(topicDto);
         dbContext.Topics.Remove(topic);
         await dbContext.SaveChangesAsync();
     }
@@ -61,12 +62,13 @@ public class TopicService : ITopicService
 
         await dbContext.SaveChangesAsync();
     }
-    public async Task<PagedResult<GetAllTopicsDto>> GetAll(PaginationFilter paginationFilter)
+    public async Task<PagedResult<TopicDto>> GetAll(PaginationFilter paginationFilter)
     {
         var basicQuery = await dbContext
             .Topics
             .AsNoTracking()
             .Include(c => c.Comments)
+            .ThenInclude(c => c.User)
             .Include(u => u.User)
             .Where(r => paginationFilter.SearchPhrase == null
             || r.NameOfTopic.ToLower().Contains(paginationFilter.SearchPhrase.ToLower())
@@ -83,21 +85,25 @@ public class TopicService : ITopicService
         {
             throw new NotFoundException("A list of topic is empty");
         }
-        var mappedTopics = mapper.Map<List<GetAllTopicsDto>>(topics);
-        var pagedResult = new PagedResult<GetAllTopicsDto>(mappedTopics, paginationFilter.PageSize, paginationFilter.PageNumber, totalItemsCount);
+        var mappedTopics = mapper.Map<List<TopicDto>>(topics);
+        var pagedResult = new PagedResult<TopicDto>(mappedTopics, paginationFilter.PageSize, paginationFilter.PageNumber, totalItemsCount);
         return pagedResult;
     }
 
-    public async Task<Topic> getTopicForId(int id)
+    public async Task<TopicDto> getTopicForId(int id)
     {
         var topic = await dbContext
             .Topics
             .AsNoTracking()
             .Include(c => c.Comments)
+            .ThenInclude(c => c.User)
+            .Include(u => u.User)
             .FirstOrDefaultAsync(x => x.Id == id);
+
+        var topicDto = mapper.Map<TopicDto>(topic);
 
         if (topic == null)
             throw new NotFoundException("Topic not found");
-         return topic;
+         return topicDto;
     }
 }

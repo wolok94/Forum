@@ -2,7 +2,7 @@
 
 namespace Forum.Models
 {
-    public class GetAllUsersDto
+    public class UserDto
     {
         [Required]
         public string Email { get; set; }

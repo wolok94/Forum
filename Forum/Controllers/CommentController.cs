@@ -38,5 +38,13 @@ namespace Forum.Controllers
         {
             return Ok(await commentService.GetAll(paginationFilter, topicId));
         }
+        [HttpPut]
+        [Route("comments/{commentId}")]
+        public async Task <IActionResult> Update ([FromRoute] int commentId, [FromBody] string description)
+        {
+            await commentService.Update(commentId, description);
+            return Ok();
+        }
+
     }
 }

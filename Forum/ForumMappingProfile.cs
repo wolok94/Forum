@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using Forum.Entities;
-using Forum.Models;
 using Forum.Pagination;
-
+using Forum.Models;
 namespace Forum
 {
     public class ForumMappingProfile : Profile
@@ -10,12 +9,13 @@ namespace Forum
         public ForumMappingProfile()
         {
             CreateMap<CreateUserDto, User>();
-            CreateMap<User, GetAllUsersDto>();
-            CreateMap<Topic, GetAllTopicsDto>()
-                .ForMember(t => t.User, c => c.MapFrom(u => u.User.Nick));
-            CreateMap<Comment, CommentDto>();
-            CreateMap<Comment, GetCommentsDto>();
-            CreateMap<PagedResult<Topic>, PagedResult<GetAllTopicsDto>>();
+            CreateMap<User, UserDto>();
+            CreateMap<Comment, CommentDto>()
+                .ForMember(c => c.UserName, c=> c.MapFrom(c=> c.User.Nick));
+            CreateMap<PagedResult<Topic>, PagedResult<TopicDto>>();
+            CreateMap<Topic, TopicDto>()
+                .ForMember(t => t.UserName, t => t.MapFrom(t => t.User.Nick));
+            CreateMap<TopicDto, Topic>();
         }
     }
 }
