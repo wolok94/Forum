@@ -62,12 +62,13 @@ public class TopicService : ITopicService
 
         await dbContext.SaveChangesAsync();
     }
-    public async Task<PagedResult<GetAllTopicsDto>> GetAll(PaginationFilter paginationFilter)
+    public async Task<PagedResult<TopicDto>> GetAll(PaginationFilter paginationFilter)
     {
         var basicQuery = await dbContext
             .Topics
             .AsNoTracking()
             .Include(c => c.Comments)
+            .ThenInclude(c => c.User)
             .Include(u => u.User)
             .Where(r => paginationFilter.SearchPhrase == null
             || r.NameOfTopic.ToLower().Contains(paginationFilter.SearchPhrase.ToLower())
@@ -84,8 +85,8 @@ public class TopicService : ITopicService
         {
             throw new NotFoundException("A list of topic is empty");
         }
-        var mappedTopics = mapper.Map<List<GetAllTopicsDto>>(topics);
-        var pagedResult = new PagedResult<GetAllTopicsDto>(mappedTopics, paginationFilter.PageSize, paginationFilter.PageNumber, totalItemsCount);
+        var mappedTopics = mapper.Map<List<TopicDto>>(topics);
+        var pagedResult = new PagedResult<TopicDto>(mappedTopics, paginationFilter.PageSize, paginationFilter.PageNumber, totalItemsCount);
         return pagedResult;
     }
 

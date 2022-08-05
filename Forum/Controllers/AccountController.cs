@@ -40,5 +40,12 @@ namespace Forum.Controllers
             return Ok(await accountService.GetAll());
         }
 
+        [HttpGet]
+        [Route("account/{id}")]
+        [Authorize(Roles = "Admin, User")]
+        public async Task <IActionResult> GetById([FromRoute] int id)
+        {
+            return Ok (await accountService.GetById(id));
+        }
     }
 }
