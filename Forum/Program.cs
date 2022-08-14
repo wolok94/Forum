@@ -12,7 +12,9 @@ using Microsoft.AspNetCore.Authorization;
 using NLog.Web;
 using Forum.Middleware;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("Forum.IntegrationTests")]
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.ClearProviders();

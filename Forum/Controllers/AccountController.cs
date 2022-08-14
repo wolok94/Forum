@@ -18,8 +18,7 @@ namespace Forum.Controllers
         }
 
         [HttpPost]
-        [Route("/account/register")]
-        [Authorize(Roles = "Admin")]
+        [Route("account/register")]
         public async Task <IActionResult> Create([FromBody] CreateUserDto userDto)
         {
             await accountService.RegisterUser(userDto);
