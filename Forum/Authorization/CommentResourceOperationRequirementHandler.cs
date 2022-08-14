@@ -21,9 +21,9 @@ namespace Forum.Authorization
                 context.Succeed(requirement);
             }
 
-            User user = (User)context.User.Identity;
+            int userId = int.Parse(context.User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
             string role = context.User.FindFirst(c => c.Type == ClaimTypes.Role).Value;
-            if (comment.User == user || role == "Admin")
+            if (comment.UserId == userId || role == "Admin")
             {
                 context.Succeed(requirement);
             }
