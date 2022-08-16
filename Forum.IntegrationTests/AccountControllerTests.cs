@@ -1,25 +1,23 @@
 ﻿using FluentAssertions;
-using Forum.Entities;
-using Forum.IntegrationTests.Helper;
-using Forum.Models;
+using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
-using System;
-using System.Collections.Generic;
+using Moq;
+using Forum.Entities;
+using Forum.IntegrationTests.Helper;
+using Forum.Models;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace Forum.IntegrationTests
 {
-    public class AccountControllerTests : IClassFixture<WebApplicationFactory<Program>>
+    public class AccountControllerTests 
     {
-        private readonly HttpClient _client;
-
+        private HttpClient _client;
+        private Mock<IAccountService> _mock = new Mock<IAccountService>();
         public AccountControllerTests()
         {
             _client = new WebApplicationFactory<Program>()
@@ -30,8 +28,9 @@ namespace Forum.IntegrationTests
                         var dbContext = services.SingleOrDefault(c => c.ServiceType == typeof(DbContextOptions<ForumDbContext>));
                         services.Remove(dbContext);
 
-                        services.AddDbContext<ForumDbContext>(options => options.UseInMemoryDatabase("ForumDb"));
-
+                        services.AddDbContext<ForumDbContext>(options => options.UseInMemoryDatabase("Test"));
+                        services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
+                        services.AddSingleton<IAccountService>(_mock.Object);
 
                     });
                 }).CreateClient();
@@ -73,5 +72,55 @@ namespace Forum.IntegrationTests
             //assert
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
         }
+        [Fact]
+        public async Task Login_ForValidModel_ReturnsOk()
+        {
+            //arrange
+             _mock.Setup(x => x.GenerateJWT(It.IsAny<LoginDto>()))
+                .ReturnsAsync("jwt");
+            var model = new LoginDto()
+            {
+                Nick = "Test",
+                Password = "test1"
+            };
+            //act
+            var httpContent = model.SerializeForHttp();
+            var response = await _client.PostAsync("api/account/login", httpContent);
+
+            //assert
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        }
+        [Fact]
+        public async Task Login_ForInvalidModel_ReturnsBadRequest()
+        {
+            //arrange
+            _mock.Setup(x => x.GenerateJWT(It.IsAny<LoginDto>()))
+               .ReturnsAsync("jwt");
+            var model = new LoginDto()
+            {
+                Nick = "Test"
+                
+            };
+            //act
+            var httpContent = model.SerializeForHttp();
+            var response = await _client.PostAsync("api/account/login", httpContent);
+
+            //assert
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
+        }
+        [Theory]
+        [InlineData(8)]
+        [InlineData(9)]
+        public async Task GetById_ForValidId_ReturnsOk(int id)
+        {
+            //act
+            var response = await _client.GetAsync($"api/account/{id}");
+
+            //assert
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+
+        }
+
+
     }
 }

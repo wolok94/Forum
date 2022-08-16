@@ -31,13 +31,6 @@ namespace Forum.Controllers
         {
             return Ok(await accountService.GenerateJWT(dto));
         }
-        [HttpGet]
-        [Route("accounts")]
-        [Authorize(Roles = "Admin")]
-        public async Task <IActionResult> GetAll()
-        {
-            return Ok(await accountService.GetAll());
-        }
 
         [HttpGet]
         [Route("account/{id}")]

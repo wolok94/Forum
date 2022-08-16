@@ -48,7 +48,7 @@ namespace Forum.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("Forum.Entities.Role", b =>
@@ -65,7 +65,7 @@ namespace Forum.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("Forum.Entities.Topic", b =>
@@ -93,7 +93,7 @@ namespace Forum.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Topics");
+                    b.ToTable("Topics", (string)null);
                 });
 
             modelBuilder.Entity("Forum.Entities.User", b =>
@@ -132,7 +132,7 @@ namespace Forum.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Forum.Entities.Comment", b =>
