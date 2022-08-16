@@ -33,11 +33,12 @@ namespace Forum.Controllers
         }
 
         [HttpGet]
-        [Route("account/{id}")]
+        [Route("account/{accountId}")]
         [Authorize(Roles = "Admin, User")]
-        public async Task <IActionResult> GetById([FromRoute] int id)
+        public async Task <IActionResult> GetById([FromRoute] int accountId)
         {
-            return Ok (await accountService.GetById(id));
+            var user = await accountService.GetById(accountId);
+            return Ok (user);
         }
     }
 }
