@@ -87,12 +87,10 @@ namespace Forum.Services
 
         }
 
-        public async Task<UserDto> GetById(int id)
+        public async Task<UserDto> GetById(int accountId)
         {
-            var user = await dbContext.Users
-                .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Id == id);
-            var users = await dbContext.Users.AsNoTracking().ToListAsync();
+            var user =  await dbContext.Users
+                .FirstOrDefaultAsync(x => x.Id == accountId);
             if (user is null)
             {
                 throw new NotFoundException("User not founded");

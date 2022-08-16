@@ -30,3 +30,15 @@ Forum.IntegrationTests/bin/Debug/net6.0/CoverletSourceRootsMapping
 *.exe
 Forum.IntegrationTests/obj/Debug/net6.0/Forum.IntegrationTests.MvcApplicationPartsAssemblyInfo.cs
 Forum/obj/Debug/net6.0/Forum.csproj.FileListAbsolute.txt
+Forum.IntegrationsTests/bin/Debug/net6.0/CoverletSourceRootsMapping
+Forum.IntegrationsTests/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+Forum.IntegrationsTests/obj/Debug/net6.0/Forum.IntegrationsTests.AssemblyInfo.cs
+Forum.IntegrationsTests/obj/Debug/net6.0/Forum.IntegrationsTests.csproj.CopyComplete
+Forum.IntegrationsTests/obj/Debug/net6.0/Forum.IntegrationsTests.csproj.FileListAbsolute.txt
+Forum.IntegrationsTests/obj/Debug/net6.0/Forum.IntegrationsTests.MvcApplicationPartsAssemblyInfo.cs
+Forum.IntegrationTest/bin/Debug/net6.0/CoverletSourceRootsMapping
+Forum.IntegrationTest/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+Forum.IntegrationTest/obj/Debug/net6.0/Forum.IntegrationTest.AssemblyInfo.cs
+Forum.IntegrationTest/obj/Debug/net6.0/Forum.IntegrationTest.csproj.CopyComplete
+Forum.IntegrationTest/obj/Debug/net6.0/Forum.IntegrationTest.csproj.FileListAbsolute.txt
+Forum.IntegrationTest/obj/Debug/net6.0/Forum.IntegrationTest.MvcApplicationPartsAssemblyInfo.cs

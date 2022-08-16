@@ -27,7 +27,7 @@ namespace Forum.IntegrationTests
                         var dbContext = services.SingleOrDefault(c => c.ServiceType == typeof(DbContextOptions<ForumDbContext>));
                         services.Remove(dbContext);
 
-                        services.AddDbContext<ForumDbContext>(options => options.UseInMemoryDatabase("Forum"));
+                        services.AddDbContext<ForumDbContext>(options => options.UseInMemoryDatabase("ForumDbContext"));
                     });
                 }).CreateClient();
         }

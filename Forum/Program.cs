@@ -14,7 +14,7 @@ using Forum.Middleware;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Forum.IntegrationTests")]
+[assembly: InternalsVisibleTo("Forum.IntegrationTest")]
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.ClearProviders();
