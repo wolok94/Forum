@@ -1,27 +1,23 @@
 ﻿using FluentAssertions;
-using Forum.Entities;
-using Forum.IntegrationTests.Helper;
-using Forum.Models;
 using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Moq;
-using System;
-using System.Collections.Generic;
+using Forum.Entities;
+using Forum.IntegrationTests.Helper;
+using Forum.Models;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace Forum.IntegrationTests
 {
-    public class AccountControllerTests : IClassFixture<WebApplicationFactory<Program>>
+    public class AccountControllerTests 
     {
-        private readonly HttpClient _client;
-        private readonly Mock<IAccountService> _mock = new Mock<IAccountService>();
+        private HttpClient _client;
+        private Mock<IAccountService> _mock = new Mock<IAccountService>();
         public AccountControllerTests()
         {
             _client = new WebApplicationFactory<Program>()
@@ -32,8 +28,9 @@ namespace Forum.IntegrationTests
                         var dbContext = services.SingleOrDefault(c => c.ServiceType == typeof(DbContextOptions<ForumDbContext>));
                         services.Remove(dbContext);
 
-                        services.AddDbContext<ForumDbContext>(options => options.UseInMemoryDatabase("ForumDb"));
-                        
+                        services.AddDbContext<ForumDbContext>(options => options.UseInMemoryDatabase("Test"));
+                        services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
+                        services.AddSingleton<IAccountService>(_mock.Object);
 
                     });
                 }).CreateClient();
@@ -111,15 +108,19 @@ namespace Forum.IntegrationTests
             //assert
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
         }
-        [Fact]
-        public async Task GetAll_ForRegisteredAdmin_ReturnsOk()
+        [Theory]
+        [InlineData(8)]
+        [InlineData(9)]
+        public async Task GetById_ForValidId_ReturnsOk(int id)
         {
-            var response = await _client.GetAsync("api/accounts");
+            //act
+            var response = await _client.GetAsync($"api/account/{id}");
 
             //assert
             response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
 
         }
+
 
     }
 }

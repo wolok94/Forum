@@ -15,6 +15,7 @@ namespace Forum
         {
             if (dbContext.Database.CanConnect())
             {
+
                 if (!dbContext.Roles.Any())
                 {
                     var roles = GetRoles();

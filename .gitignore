@@ -27,3 +27,6 @@ Forum.UnitTests/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
 Forum.UnitTests/bin/Debug/net6.0/testhost.exe
 Forum.IntegrationTests/bin/Debug/net6.0/testhost.exe
 Forum.IntegrationTests/bin/Debug/net6.0/CoverletSourceRootsMapping
+*.exe
+Forum.IntegrationTests/obj/Debug/net6.0/Forum.IntegrationTests.MvcApplicationPartsAssemblyInfo.cs
+Forum/obj/Debug/net6.0/Forum.csproj.FileListAbsolute.txt

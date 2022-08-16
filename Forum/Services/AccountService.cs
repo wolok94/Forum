@@ -69,17 +69,6 @@ namespace Forum.Services
 
         }
 
-        public async Task <IEnumerable<UserDto>> GetAll()
-        {
-            var users = await dbContext.Users
-                .AsNoTracking()
-                .Include(x => x.Role)
-                .ToListAsync();
-
-            var mapUsers = mapper.Map<List<UserDto>>(users);
-            return mapUsers;
-        }
-
         public async Task RegisterUser(CreateUserDto dto)
         {
             var newUser = new User()
@@ -100,7 +89,14 @@ namespace Forum.Services
 
         public async Task<UserDto> GetById(int id)
         {
-            var user = await dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+            var user = await dbContext.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
+            var users = await dbContext.Users.AsNoTracking().ToListAsync();
+            if (user is null)
+            {
+                throw new NotFoundException("User not founded");
+            }
             var userDto = mapper.Map<UserDto>(user);
             return userDto;
         }
