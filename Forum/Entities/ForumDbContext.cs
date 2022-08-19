@@ -3,7 +3,7 @@
 
 namespace Forum.Entities
 {
-    public class ForumDbContext :DbContext
+    public class ForumDbContext : DbContext
     {
 
 

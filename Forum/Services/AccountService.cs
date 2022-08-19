@@ -19,14 +19,16 @@ namespace Forum.Services
         private readonly IPasswordHasher<User> passwordHasher;
         private readonly AuthenticationSettings authenticationSettings;
         private readonly IMapper mapper;
+        private readonly IUserContextService _userContext;
 
         public AccountService(ForumDbContext dbContext, IPasswordHasher<User> passwordHasher
-            , AuthenticationSettings authenticationSettings, IMapper mapper)
+            , AuthenticationSettings authenticationSettings, IMapper mapper, IUserContextService userContext)
         {
             this.dbContext = dbContext;
             this.passwordHasher = passwordHasher;
             this.authenticationSettings = authenticationSettings;
             this.mapper = mapper;
+            _userContext = userContext;
         }
         public async Task <string> GenerateJWT(LoginDto dto)
         {
@@ -89,14 +91,35 @@ namespace Forum.Services
 
         public async Task<UserDto> GetById(int accountId)
         {
-            var user =  await dbContext.Users
-                .FirstOrDefaultAsync(x => x.Id == accountId);
+            var user = getUserById(accountId);
             if (user is null)
             {
                 throw new NotFoundException("User not founded");
             }
             var userDto = mapper.Map<UserDto>(user);
             return userDto;
+        }
+        public async Task Delete(int accountId)
+        {
+            var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Id == accountId);
+            if (user == null)
+            {
+                throw new NotFoundException("That user does not exist ");
+            }
+            if (_userContext.GetId == accountId)
+            {
+                dbContext.Remove(user);
+                dbContext.SaveChanges();
+            }
+        }
+        private User getUserById (int accountId)
+        {
+            var user =  dbContext.Users
+                .AsNoTracking()
+                .Include(c => c.Comments)
+                .FirstOrDefault(x => x.Id == accountId);
+
+            return user;
         }
     }
 }

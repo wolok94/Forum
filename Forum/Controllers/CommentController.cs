@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Forum.Controllers
 {
     [ApiController]
-    [Route("api/forum/")]
+    [Route("api/forum")]
     public class CommentController : ControllerBase
     {
         private readonly ICommentService commentService;

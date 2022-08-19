@@ -7,21 +7,21 @@ namespace Forum.Controllers
 {
     
     [ApiController]
-    [Route("api/")]
+    [Route("api")]
     public class AccountController : ControllerBase
     {
-        private readonly IAccountService accountService;
+        private readonly IAccountService _accountService;
 
         public AccountController(IAccountService accountService)
         {
-            this.accountService = accountService;
+            _accountService = accountService;
         }
 
         [HttpPost]
         [Route("account/register")]
         public async Task <IActionResult> Create([FromBody] CreateUserDto userDto)
         {
-            await accountService.RegisterUser(userDto);
+            await _accountService.RegisterUser(userDto);
             return Ok();
         }
 
@@ -29,7 +29,7 @@ namespace Forum.Controllers
         [Route("account/login")]
         public async Task <IActionResult> Login([FromBody] LoginDto dto)
         {
-            return Ok(await accountService.GenerateJWT(dto));
+            return Ok(await _accountService.GenerateJWT(dto));
         }
 
         [HttpGet]
@@ -37,8 +37,17 @@ namespace Forum.Controllers
         [Authorize(Roles = "Admin, User")]
         public async Task <IActionResult> GetById([FromRoute] int accountId)
         {
-            var user = await accountService.GetById(accountId);
+            var user = await _accountService.GetById(accountId);
             return Ok (user);
         }
+        [HttpDelete]
+        [Route("account/delete/{accountId}")]
+        [Authorize(Roles = "Admin, User")]
+        public async Task <IActionResult> Delete([FromRoute] int accountId)
+        {
+            await _accountService.Delete(accountId);
+            return Ok();
+        }
+
     }
 }

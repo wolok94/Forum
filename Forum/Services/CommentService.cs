@@ -6,6 +6,7 @@ using Forum.Models;
 using Forum.Pagination;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Forum.Services
 {
@@ -60,22 +61,34 @@ namespace Forum.Services
         }
         public async Task<PagedResult<CommentDto>> GetAll(PaginationFilter paginationFilter, int topicId)
         {
-
-            var basicQuery = await dbContext.Comments
+            var list = await dbContext.Comments.Include(x => x.User).Where(x => x.TopicId == topicId).ToListAsync();
+            var basicQuery = dbContext.Comments
                 .AsNoTracking()
-                .Where(r => r.TopicId == topicId && 
-                paginationFilter.SearchPhrase == null || r.Description == paginationFilter.SearchPhrase)
                 .Include(u => u.User)
-                .ToListAsync();
+                .Where(r => r.TopicId == topicId &&
+                (paginationFilter.SearchPhrase == null || r.Description == paginationFilter.SearchPhrase));
+
+            if (!string.IsNullOrEmpty(paginationFilter.SortBy))
+            {
+                var dictionary = new Dictionary<string, Expression<Func<Comment, object>>>
+                {
+                    {nameof (Comment.DateOfCreate), c => c.DateOfCreate },
+                    {nameof (Comment.User), c=> c.User }
+                };
+
+                var selectedColumns = dictionary[paginationFilter.SortBy];
+                basicQuery = paginationFilter.SortDirection == SortDirection.ASC ?
+                   basicQuery.OrderBy(selectedColumns) : basicQuery.OrderByDescending(selectedColumns);
+            }
 
             var comments = basicQuery
                 .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
                 .Take(paginationFilter.PageSize)
                 .ToList();
 
-            var totalItemsCount = basicQuery.Count;
+            var totalItemsCount = basicQuery.Count();
 
-            if (comments == null)
+            if (!comments.Any())
             {
                 throw new NotFoundException("Comments not founded");
             }
@@ -85,7 +98,7 @@ namespace Forum.Services
             var pagedResult = new PagedResult<CommentDto>(mappedComments, paginationFilter.PageSize, paginationFilter.PageNumber, totalItemsCount);
 
             return pagedResult;
-         }
+        }
 
         public async Task Update(int commentId, string description)
         {
