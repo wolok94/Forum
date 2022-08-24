@@ -41,11 +41,16 @@ public class TopicService : ITopicService
     }
     public async Task Delete(int id)
     {
-        var topicDto = await getTopicForId(id);
-        var result = authorizationService.AuthorizeAsync(context.User, topicDto, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+        var topic = await dbContext.Topics.FirstOrDefaultAsync(t => t.UserId == id);
+        if (topic == null)
+        {
+            throw new NotFoundException("Topic not founded");
+        }
+        var result = authorizationService.AuthorizeAsync(context.User, topic, new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
         if (!result.Succeeded)
+        {
             throw new ForbidException("You are unauthorized");
-        var topic = mapper.Map<Topic>(topicDto);
+        }
         dbContext.Topics.Remove(topic);
         await dbContext.SaveChangesAsync();
     }
@@ -64,7 +69,7 @@ public class TopicService : ITopicService
     }
     public async Task<PagedResult<TopicDto>> GetAll(PaginationFilter paginationFilter)
     {
-        var basicQuery = await dbContext
+        var basicQuery = dbContext
             .Topics
             .AsNoTracking()
             .Include(c => c.Comments)
@@ -72,16 +77,16 @@ public class TopicService : ITopicService
             .Include(u => u.User)
             .Where(r => paginationFilter.SearchPhrase == null
             || r.NameOfTopic.ToLower().Contains(paginationFilter.SearchPhrase.ToLower())
-            || r.Description.ToLower().Contains(paginationFilter.SearchPhrase.ToLower()))
-            .ToListAsync();
+            || r.Description.ToLower().Contains(paginationFilter.SearchPhrase.ToLower()));
+            
 
-        var topics = basicQuery
+        var topics = await basicQuery
             .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
             .Take(paginationFilter.PageSize)
-            .ToList();
+            .ToListAsync();
 
         var totalItemsCount = basicQuery.Count();
-        if (topics == null)
+        if (!topics.Any())
         {
             throw new NotFoundException("A list of topic is empty");
         }

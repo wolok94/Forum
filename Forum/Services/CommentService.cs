@@ -61,7 +61,7 @@ namespace Forum.Services
         }
         public async Task<PagedResult<CommentDto>> GetAll(PaginationFilter paginationFilter, int topicId)
         {
-            var list = await dbContext.Comments.Include(x => x.User).Where(x => x.TopicId == topicId).ToListAsync();
+            
             var basicQuery = dbContext.Comments
                 .AsNoTracking()
                 .Include(u => u.User)

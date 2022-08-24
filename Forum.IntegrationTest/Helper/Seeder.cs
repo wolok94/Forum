@@ -1,53 +1,33 @@
 ﻿using Forum.Entities;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authorization.Policy;
-using System.Net.Http;
 
 namespace Forum.IntegrationTest.Helper
 {
-    public class CommentTestsHelper
+    public class Seeder
     {
-        private WebApplicationFactory<Program> _factory;
-        protected HttpClient _client;
-        private 
-        protected CommentTestsHelper()
+        
+
+        public Seeder()
         {
-            _factory = new WebApplicationFactory<Program>()
-    .WithWebHostBuilder(builder =>
-    {
-        builder.ConfigureServices(services =>
-        {
-            var dbContext = services.SingleOrDefault(c => c.ServiceType == typeof(DbContextOptions<ForumDbContext>));
-            services.Remove(dbContext);
-
-            services.AddDbContext<ForumDbContext>(options => options.UseInMemoryDatabase("Test1"));
-            services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
-            services.AddMvc(option => option.Filters.Add(new FakeUserFilter()));
-
-
-        });
-    });
-            _client = _factory.CreateClient();
+            
         }
-        protected async Task SeedUsers()
+
+        public static void SeedUsers(ForumDbContext dbContext)
         {
-            var scopeFactory = _factory.Services.GetService<IServiceScopeFactory>();
-            using var scope = scopeFactory.CreateScope();
-            var dbContext = scope.ServiceProvider.GetService<ForumDbContext>();
-            if (!await dbContext.Users.AnyAsync())
+
+            if (! dbContext.Users.Any())
             {
-                await dbContext.Users.AddRangeAsync(GetUser());
+                var users = GetUser();
+                dbContext.Users.AddRange(users);
+                dbContext.SaveChanges();
             }
-            await dbContext.SaveChangesAsync();
+
         }
-        public List<User> GetUser()
+        public static List<User> GetUser()
         {
             var users = new List<User>
             {
@@ -60,6 +40,7 @@ namespace Forum.IntegrationTest.Helper
                         {
                             NameOfTopic = "Asd",
                             Id =1,
+                            UserId = 1,
                             Comments = new List<Comment>
                             {
                                 new Comment{

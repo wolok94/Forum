@@ -42,3 +42,7 @@ Forum.IntegrationTest/obj/Debug/net6.0/Forum.IntegrationTest.AssemblyInfo.cs
 Forum.IntegrationTest/obj/Debug/net6.0/Forum.IntegrationTest.csproj.CopyComplete
 Forum.IntegrationTest/obj/Debug/net6.0/Forum.IntegrationTest.csproj.FileListAbsolute.txt
 Forum.IntegrationTest/obj/Debug/net6.0/Forum.IntegrationTest.MvcApplicationPartsAssemblyInfo.cs
+*.vsidx
+*.lock
+*.v2
+*.1
